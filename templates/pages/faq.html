@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Frequently Asked Questions{% endblock %}
+
+{% block content %}
+
+
+
+<div class="max-w-3xl mx-auto px-4 py-16">
+  <h1 class="text-4xl font-bold mb-8 text-center">Frequently Asked Questions</h1>
+
+  <div class="space-y-4">
+    {% for item in faq_items %}
+      <div class="collapse collapse-arrow bg-base-100 border border-base-200 shadow-lg rounded-box">
+        <input type="checkbox" />
+        <div class="collapse-title text-md font-medium">
+          {{ item.question }}
+        </div>
+        <div class="collapse-content text-base-content/70 text-sm">
+          <p>{{ item.answer }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

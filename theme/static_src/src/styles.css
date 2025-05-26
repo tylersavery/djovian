@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+/* 
+@plugin "daisyui" {
+    themes: business --default, business --prefersdark, cupcake, dracula;
+} */
+
+@plugin "daisyui";
+
+@plugin "daisyui/theme" {
+    name: "dark";
+    default: true;
+    prefersdark: true;
+    color-scheme: "dark";
+    --color-primary: oklch(0.61 0.2061 287.65);
+
+}
+
+
+@config './../tailwind.config.js';
+
+
+
+.revealable-text {
+    @apply inline-block;
+    @apply cursor-pointer;
+
+
+}

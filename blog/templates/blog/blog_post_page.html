@@ -1,0 +1,97 @@
+{% extends "_base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto p-4 space-y-8">
+
+    <div class="px-4 py-8 space-y-6">
+        <!-- Blog Post Title -->
+        <h1 class="text-3xl md:text-5xl font-bold">{{ page.title }}</h1>
+
+        <!-- Publication Date -->
+        <p class="text-sm text-base-content/60">Published on {{ page.date|date:"F j, Y" }}</p>
+
+        <!-- Thumbnail Image -->
+        {% if page.thumbnail %}
+            {% image page.thumbnail width-800 class="w-full rounded-lg shadow" alt=page.title %}
+        {% endif %}
+
+        <!-- Tags -->
+        <div class="flex flex-wrap gap-2">
+            {% for tag in page.tags.all %}
+                <span class="badge badge-outline text-xs">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+
+        <!-- Blog Content -->
+        <div class="prose max-w-none prose-neutral dark:prose-invert">
+            {{ page.content|richtext }}
+        </div>
+
+        <!-- Back Link -->
+        <div class="mt-10">
+            <a href="{{ page.get_parent.url }}" class="btn btn-accent">← Back to Blog</a>
+        </div>
+    </div>
+
+    {% if page.comments_enabled %}
+
+    <div class="divider"></div>
+    <div id="comment-list" class="space-y-4 mt-6">
+        {% for comment in comments %}
+          {% include "partials/blog/comment.html" with comment=comment %}
+        {% endfor %}
+      </div>
+
+
+    {% if can_comment %}
+    <form   
+        method="post"
+        hx-post="{% url 'submit_comment' slug=page.slug %}"
+        hx-target="#comment-list"
+        hx-swap="beforeend"
+        class="bg-base-200 p-4 rounded-xl shadow-md space-y-4">
+
+        {% csrf_token %}
+      
+        <h3 class="text-lg font-semibold">Leave a comment</h3>
+      
+        <textarea
+          name="text"
+          rows="4"
+          placeholder="What are your thoughts?"
+          class="textarea textarea-bordered w-full resize-none"
+          required></textarea>
+      
+        <div class="flex justify-between items-center">
+          <p class="text-xs text-base-content/60">
+            Comments are visible to contributors with access.
+          </p>
+          <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+        </div>
+      </form>
+      {% else %}
+      <div class="bg-base-200 rounded-xl shadow-md space-y-4 flex justify-center items-center p-4">
+        {% if page.perk_required_for_commenting %}
+
+        <div>
+            <span class="text-accent">{{page.perk_required_for_commenting.title}}</span> perk required to comment.
+        </div>
+        {% else %}
+            <div>Comments Disabled</div>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% endif %}
+</div>
+
+<style>
+    div > iframe {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        display: block;
+    }
+</style>
+{% endblock %}

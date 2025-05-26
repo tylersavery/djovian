@@ -1,0 +1,59 @@
+{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+{% for page in posts %}
+  <div class="bg-base-100 border border-base-300 rounded-xl shadow-md overflow-hidden flex flex-col hover:shadow-xl transition-shadow">
+
+    {% if page.thumbnail %}
+      <a class="aspect-video w-full overflow-hidden" {% if page.can_access %} href="{{page.url}}" {% endif %}>
+        {% image page.thumbnail fill-800x450 class="object-cover w-full h-full" alt=page.title %}
+      </a>
+    {% endif %}
+
+    <div class="p-4 flex flex-col flex-1 justify-between space-y-3">
+
+      <div>
+        <h2 class="text-lg font-semibold leading-snug mb-1">
+          {% if page.can_access %}
+            <a href="{{ page.url }}" class="hover:underline">{{ page.title }}</a>
+          {% else %}
+            {{ page.title }}
+          {% endif %}
+        </h2>
+
+        <p class="text-sm text-base-content/60">Published on {{ page.date|date:"F j, Y" }}</p>
+        <p class="text-sm text-base-content/80 line-clamp-3">{{ page.excerpt }}</p>
+
+        {% if page.tags.exists %}
+        <div class="flex flex-wrap gap-1 mt-4">
+          {% for tag in page.tags.all %}
+            <span class="badge badge-outline text-xs">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="pt-2">
+        {% if page.can_access %}
+          <a href="{{ page.url }}" class="btn btn-accent btn-sm w-full">Read more →</a>
+        {% else %}
+          <div class="tooltip w-full" data-tip="
+            {% if page.project_subscription_required %}
+              Requires following this project.
+            {% elif page.perk_required %}
+              {{ page.perk_required.title }} perk required.
+            {% else %}
+              Login required to view this post.
+            {% endif %}
+          ">
+            <button class="btn btn-sm btn-outline btn-warning w-full" disabled>Locked</button>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+{% endfor %}
+
+</div>

@@ -1,0 +1,23 @@
+{% extends '_auth_base.html' %}
+{% load static %}
+
+{% block title %}500 Server Error{% endblock %}
+
+{% block content %}
+
+
+
+
+    <h1 class="text-xl font-bold leading-tight tracking-tight  md:text-4xl text-center">Server Error</h1>
+    
+    <p class="text-center">Something went wrong. This issue has been reported and we'll get it all fixed up for you soon.</p>
+    
+    <div class="text-center">
+
+        <a href="{% url 'home' %}" class="btn btn-primary btn-outline">Return Home</a>
+    </div>
+
+
+{% endblock content %}
+
+{%block footer %}{%endblock%}

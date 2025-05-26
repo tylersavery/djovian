@@ -1,0 +1,155 @@
+{% load static tailwind_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
+    <title>
+   {% block title %}{% endblock %}
+    </title>
+
+    {% block seo %}
+      <meta name="description" content="{{seo.description}}" />
+      <meta property="og:description" content="{{seo.description}}" />
+      <meta property="og:title" content="{{seo.title}}" />
+      <meta property="og:image" content="{{seo.image}}" />
+      <meta name="keywords" content="{{seo.keywords}}" />
+    {% endblock %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+    <link rel="icon" type="image/png" href="{% static 'favicon-32x32.png' %}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{% static 'favicon-16x16.png' %}" sizes="16x16" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}" />
+    <link rel="manifest" href="{% static 'site.webmanifest' %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+   
+
+    {% block css %}
+      
+    {% endblock %}
+
+    {% block extra_css %}
+
+    {% endblock %}
+
+    {% tailwind_css v=release_version %}
+
+    {% if gtag_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{gtag_id}}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{gtag_id}}');
+    </script>
+
+    {% endif %}
+  </head>
+
+  <body class="bg-base-300">
+    <div class="min-h-screen flex flex-col">
+      <div class="grow">
+        {% include 'partials/base/header/header.html' %}
+
+        <main>
+
+          {% if messages %}
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+              {% include 'partials/base/messages.html' %}
+            </div>
+            {% endif %}
+
+            {% block content %}
+
+            {% endblock %}
+        </main>
+      </div>
+      {% include 'partials/base/footer.html' %}
+    </div>
+
+    {% block javascript %}
+      <!-- Project JS -->
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+      <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+      <script src="https://js.stripe.com/v3/"></script>
+
+      <script>
+        document.body.addEventListener('htmx:afterSwap', function (event) {
+          initFlowbite()
+        })
+      </script>
+
+      <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+          const token = document.querySelector('meta[name="csrf-token"]').content;
+          event.detail.headers['X-CSRFToken'] = token;
+        });
+      </script>
+      
+
+      <script src="{% static 'js/main.js' %}" type="module"></script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          document.querySelectorAll(".revealable-text").forEach(el => {
+            const originalClass = el.classList;
+            const original = el.innerText;
+            const textToReveal = el.dataset.textToReveal;
+            const url = el.dataset.url;
+            const tooltipText = el.dataset.tooltipText || `Reveal ${original}`;
+            const removeLabel = el.dataset.removeLabel == 'true';
+      
+            el.setAttribute("data-tip", tooltipText);
+            
+            el.classList.add("hover:underline")
+            el.classList.add("tooltip")
+
+      
+            el.addEventListener("click", () => {
+              el.classList.remove("hover:underline")
+              el.classList.remove("cursor-pointer")
+
+              if(removeLabel){
+                const content = url
+                ? `<span><a href="${url}" target="_blank" class="text-accent hover:underline">${textToReveal}</a><span>`
+                  : `${textToReveal}`;
+                  
+                  el.innerHTML = content;
+              } else{
+
+                const content = url
+                ? `<span>${original}: <a href="${url}" target="_blank" class="text-accent hover:underline">${textToReveal}</a><span>`
+                  : `${original}: ${textToReveal}`;
+                  
+                  el.innerHTML = content;
+                }
+
+
+              el.classList.remove("tooltip");
+            });
+          });
+        });
+      </script>
+      <script
+      type="text/javascript"
+      src="https://app.termly.io/resource-blocker/86a333e8-b4b2-4d27-81ac-5243207f08eb?autoBlock=on"
+    ></script>
+
+    {% endblock %}
+
+    {% block extra_js %}
+    
+
+    {% endblock %}
+  </body>
+</html>

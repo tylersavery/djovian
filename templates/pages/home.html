@@ -1,0 +1,39 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="bg-base-100 text-base-content">
+
+  <!-- Hero Section -->
+  <section class="w-full px-6 py-20 bg-gradient-to-br from-purple-700 to-indigo-900 text-white">
+    
+    <div class="max-w-7xl mx-auto space-y-6 text-center ">
+
+      <h1 class="text-4xl  font-bold md:text-5xl">
+        Hero Text.<br>
+        Goes Here
+      </h1>
+      <p class="text-lg text-base-content/70 max-w-2xl mx-auto">
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+      <div class="mt-8 flex justify-center gap-4">
+        {% if authenticated_user %}
+        <a href="{% url 'profile' username=authenticated_user.username %}" class="btn btn-primary btn-lg">My Profile</a>
+    
+        {% else %}
+        <a href="{% url 'account_login' %}" class="btn btn-primary btn-lg">Login</a>
+        <a href="{% url 'account_signup' %}" class="btn btn-primary btn-lg">Sign up</a>
+        {% endif %}
+
+      </div>
+  </div>
+  </section>
+
+
+</div>
+
+ 
+{% endblock %}

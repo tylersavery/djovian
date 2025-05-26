@@ -1,0 +1,18 @@
+<footer class="bg-base-100 border-t border-base-300">
+  <div class=" px-4 py-6 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      <!-- Left Section -->
+      <div class="text-center md:text-left">
+        <p class="text-xs">&copy; {{ current_year }} {{website_name}}. All rights reserved.</p>
+      </div>
+
+      <div class="flex space-x-4 text-xs">
+        <a href="{% url 'home' %}" class="hover:underline">Home</a>
+        <a href="{% url 'faq' %}" class="hover:underline">FAQs</a>
+        <a href="{% url 'contact' %}" class="hover:underline">Contact</a>
+        <a href="{% url 'terms_and_conditions' %}" class="hover:underline" target="_blank">Terms of Service</a>
+        <a href="{% url 'privacy_policy' %}" class="hover:underline" target="_blank">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>

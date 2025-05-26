@@ -1,0 +1,67 @@
+{% if authenticated_user %}
+
+<button id="userDropdownButton1" data-dropdown-toggle="userDropdown1" type="button"
+    class="inline-flex items-center rounded-lg justify-center p-2 hover:  font-medium leading-none ">
+    <svg class="w-5 h-5 me-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-width="2"
+            d="M7 17v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3h-4a3 3 0 0 0-3 3Zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+    <span class="hidden md:inline">
+        Account
+    </span>
+    <svg class="w-4 h-4  ms-1 hidden md:inline" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+        width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7" />
+    </svg>
+</button>
+
+<div id="userDropdown1"
+    class="hidden z-10 w-56 divide-y  overflow-hidden overflow-y-auto rounded-lg  antialiased shadow-sm ">
+    <ul class="p-2 text-start text-sm font-medium  ">
+        <li><a href="{% url 'profile' username=authenticated_user.username %}" title=""
+                class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover: ">
+                My Profile</a></li>
+        <li><a href="{% url 'settings' %}" title=""
+                class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover: ">
+                Settings </a></li>
+                <li><a href="{% url 'terms_and_conditions' %}" title=""
+                    class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover: ">
+                    Terms of Service </a></li>
+
+                    <li><a href="{% url 'privacy_policy' %}" title=""
+                        class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover: ">
+                        Privacy Policy </a></li>
+
+
+    </ul>
+
+    <div class="p-2 text-sm font-medium  e">
+        <a href="{% url 'account_logout' %}" title=""
+            class="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover: ">
+            Sign Out </a>
+    </div>
+</div>
+
+{% else %}
+
+<ul class=" items-center justify-start gap-6 md:gap-8 py-3 sm:justify-center hidden md:flex">
+
+    <li>
+        <a href="{% url 'account_login' %}" title=""
+            class="flex text-sm font-medium  hover:text-primary-700 hover:underline">
+            Login
+        </a>
+
+    </li>
+
+    <li>
+        <a href="{% url 'account_signup' %}" title=""
+            class="flex text-sm font-medium  hover:text-primary-700 hover:underline">
+            Signup
+        </a>
+
+    </li>
+</ul>
+
+{% endif %}

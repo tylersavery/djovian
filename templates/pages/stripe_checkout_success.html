@@ -1,0 +1,13 @@
+{% extends '_base.html' %}
+
+{% block title %}Thank you for your payment{% endblock %}
+
+{% block content %}
+
+<div class="flex justify-center items-center flex-col">
+<div class="py-4"></div>
+<h1 class="text-center text-2xl font-semibold">Thank you for your payment!</h1>
+<div class="py-2"></div>
+<a href="{% url 'home' %}" class="font-bold py-2 px-4 border  rounded-r-lg md:rounded-sm ">Go Home</a>
+</div>
+{% endblock content %}

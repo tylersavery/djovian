@@ -1,0 +1,24 @@
+{% load humanize %}
+
+<div class="bg-base-200 rounded-xl p-4 shadow-sm">
+    <div class="flex items-center gap-3 mb-2">
+      {% if comment.user.avatar %}
+      <a href="{% url 'profile' username=comment.user.username %}">
+        <img src="{{ comment.user.avatar.url }}"
+             class="w-10 h-10 rounded-full border border-base-300" alt="{{ comment.user.username }}">
+      </a>
+      {% else %}
+        <a  href="{% url 'profile' username=comment.user.username %}" class="w-10 h-10 rounded-full bg-base-300 flex items-center justify-center text-sm">
+          {{ comment.user.username|slice:":1" }}
+        </a>
+      {% endif %}
+  
+      <div>
+        <a href="{% url 'profile' username=comment.user.username %}" class="font-semibold text-sm hover:underline">{{ comment.user.username }}</a>
+        <div class="text-xs text-base-content/60">{{ comment.created_at|naturaltime }}</div>
+      </div>
+    </div>
+  
+    <div class="text-sm whitespace-pre-line">{{ comment.text }}</div>
+  </div>
+  

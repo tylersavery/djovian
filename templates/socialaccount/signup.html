@@ -1,0 +1,30 @@
+{% extends '_auth_base.html' %}
+{% load i18n %}
+{% load allauth %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% trans "Signup" %}
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-lg  leading-tight tracking-tight  text-center">
+    You are about to use your {{provider_name}} account to login. Please complete the following details:
+  </h1>
+
+
+
+<form method="post" action="{% url 'socialaccount_signup' %}">
+    {% csrf_token %}
+
+    {{ form|crispy }}
+    <button type="submit" class="w-full mt-3  hover:  font-bold py-2 px-4 border  rounded-r-lg md:rounded-sm ">Complete</button>
+
+
+
+</form>
+
+
+
+{% endblock content %}
