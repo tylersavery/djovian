@@ -1,4 +1,4 @@
-# 🎬 Djovian
+# 🛰️ Djovian
 
 A full-stack Django starter project.
 
@@ -50,7 +50,12 @@ make migrate
 make createsuperuser
 ```
 
-Then visit: [http://localhost:8000/admin](http://localhost:8000/admin)
+### 5. Load the admin theme data
+```bash
+make admin_theme_load
+```
+
+Then visit: [http://localhost:8000/manage](http://localhost:8000/manage)
 
 ---
 
@@ -73,11 +78,6 @@ Then visit: [http://localhost:8000/admin](http://localhost:8000/admin)
 
 The platform uses **Celery** + **Redis** for async jobs.
 
-Start the worker:
-```bash
-make celery
-```
-
 ---
 
 ## 🧱 Services
@@ -94,10 +94,4 @@ make celery
 
 ## 📦 Deployment
 
-In production:
-- Set `DJANGO_ENV=production`
-- Gunicorn will start automatically
-- Use Nginx to reverse proxy to the container
-- Make sure static files are served via volume or CDN
-
----
+This project is very portible. You can run it on Heroku or similar services very easily. You can also run it yourself anywhere that you can get docker running.
