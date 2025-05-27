@@ -43,6 +43,7 @@ module.exports = {
         './node_modules/flowbite/**/*.js'
     ],
     theme: {
+
         extend: {
             colors: {
                 // blue: '0689f3',
@@ -53,6 +54,7 @@ module.exports = {
         },
 
     },
+
     plugins: [
         /**
          * '@tailwindcss/forms' is the forms plugin that provides a minimal styling

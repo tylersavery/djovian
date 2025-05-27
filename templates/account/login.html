@@ -22,11 +22,13 @@
   <button type="submit"
     class="btn btn-primary w-full">Sign in</button>
   <p class="text-sm font-light">
-    Don't have an account yet? <a href="{% url 'account_signup' %}{% if request.GET.next %}?next={{ request.GET.next }}?next=/{% endif %}" class=" hover:underline text-accent">Sign up</a>.
+    Don't have an account yet? <a href="{% url 'account_signup' %}{% if request.GET.next %}?next={{ request.GET.next }}?next=/{% endif %}" class=" hover:underline text-secondary">Sign up</a>.
   </p>
 
 </form>
-{% include 'partials/auth/social_buttons.html'  %}
 
+{% if social_login_enabled %}
+  {% include 'partials/auth/social_buttons.html'  %}
+{% endif %}
 
 {% endblock content %}

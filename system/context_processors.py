@@ -6,4 +6,6 @@ def global_context(request):
     if settings.GTAG_ID:
         context["gtag_id"] = settings.GTAG_ID
 
+    context["theme"] = request.COOKIES.get("theme", "dark")
+
     return context
