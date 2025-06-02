@@ -29,10 +29,6 @@
 @config './../tailwind.config.js';
 
 
-
-.revealable-text {
-    @apply inline-block;
-    @apply cursor-pointer;
-
-
+#hint_id_password {
+    @apply text-accent hover:underline;
 }

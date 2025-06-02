@@ -30,6 +30,7 @@ class ExampleAdmin(ModelAdmin):
         "uuid",
         "title",
         "owner",
+        "image",
         "created_at",
         "updated_at",
     )

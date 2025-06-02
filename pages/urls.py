@@ -52,7 +52,5 @@ urlpatterns = [
             "url": "https://app.termly.io/policy-viewer/policy.html?policyUUID=12b6ed65-20c3-44d7-812a-ddfb0f150402"
         },
     ),
-    path("actions/", include("pages.actions.urls")),
-    path("debug/404/", debug_views.debug_404),
-    path("debug/500/", debug_views.debug_500),
+    path("example/", include("content.urls")),
 ]

@@ -9,7 +9,6 @@ import stripe
 from access.forms import SettingsForm
 from access.models import User
 
-from content.models import Example
 from pages.base_view import BaseView
 from django.contrib.auth.models import AnonymousUser
 from django.views.generic import TemplateView

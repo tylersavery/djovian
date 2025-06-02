@@ -3,23 +3,23 @@
       <div class="space-y-2">
         {% for message in messages %}
           {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-            <div class="alert alert-info">
+            <div class="alert alert-info gap-x-1">
               <span class="font-medium">Info:</span> {{ message }}
             </div>
           {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-            <div class="alert alert-success">
+            <div class="alert alert-success gap-x-1">
               <span class="font-medium">Success:</span> {{ message }}
             </div>
           {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-            <div class="alert alert-warning">
+            <div class="alert alert-warning gap-x-1">
               <span class="font-medium">Warning:</span> {{ message }}
             </div>
           {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-            <div class="alert alert-error">
+            <div class="alert alert-error gap-x-1">
               <span class="font-medium">Oops:</span> {{ message }}
             </div>
           {% elif message.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}
-            <div class="alert alert-neutral">
+            <div class="alert alert-neutral gap-x-1">
               <span class="font-medium">Debug:</span> {{ message }}
             </div>
           {% endif %}
