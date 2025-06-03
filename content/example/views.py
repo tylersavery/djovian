@@ -2,16 +2,36 @@ from content.example.forms import ExampleForm
 from pages.base_view import BaseView
 from django.shortcuts import get_object_or_404, redirect
 from content.example.models import Example
+from django.core.paginator import Paginator
+
+from project import settings
 
 
 class ExampleListView(BaseView):
 
-    template_name = "example/example_list.html"
+    def get_template_names(self) -> list[str]:
+        if self.kwargs.get("inner_content", False):
+            return "example/partials/_example_list_action.html"
+        return "example/example_list.html"
+
+    def get_item_list_context(self):
+        page = int(self.request.GET.get("page") or 1)
+        items = Example.objects.all().order_by("-created_at")
+        paginator = Paginator(items, settings.API_DEFAULT_LIMIT)
+
+        page_data = paginator.get_page(page)
+
+        data = {
+            "items": page_data,
+            "page": page,
+            "has_next": page_data.has_next(),
+        }
+
+        return data
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context["items"] = Example.objects.all()
-
+        context |= self.get_item_list_context()
         return self.render_to_response(context)
 
 

@@ -1,0 +1,15 @@
+{% include "example/partials/_example_list_content.html" %}
+
+{% if has_next %}
+  <div
+    id="load-more-trigger"
+    hx-get="{% url 'example_list_action' %}?page={{ page|add:1 }}"
+    hx-trigger="revealed"
+    hx-target="#example-list"
+    hx-swap="beforeend"
+    hx-indicator="#loader"
+    hx-swap-oob="true"
+  ></div>
+{% else %}
+  <div id="load-more-trigger" hx-swap-oob="true"></div>
+{% endif %}

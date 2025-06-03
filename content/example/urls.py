@@ -10,4 +10,10 @@ urlpatterns = [
     path(
         "<uuid:uuid>/delete/", views.ExampleDeleteView.as_view(), name="example_delete"
     ),
+    path(
+        "actions/list/",
+        views.ExampleListView.as_view(),
+        {"inner_content": True},
+        name="example_list_action",
+    ),
 ]
