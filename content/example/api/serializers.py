@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from access.api.querysets import ALL_USERS_QUERYSET
 from access.api.serializers import PublicUserSerializer
-from content.models import Example
+from content.example.models import Example
 from api.fields import RelatedModelField
 
 

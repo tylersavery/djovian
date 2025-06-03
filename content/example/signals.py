@@ -1,7 +1,7 @@
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
-from content.models import Example
+from content.example.models import Example
 
 
 @receiver(post_save, sender=Example)

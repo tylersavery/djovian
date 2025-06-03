@@ -1,5 +1,5 @@
 from api import filters
-from content.models import Example
+from content.example.models import Example
 
 
 class ExampleFilter(filters.FilterSet):

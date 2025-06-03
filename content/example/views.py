@@ -1,7 +1,7 @@
-from content.forms import ExampleForm
+from content.example.forms import ExampleForm
 from pages.base_view import BaseView
 from django.shortcuts import get_object_or_404, redirect
-from content.models import Example
+from content.example.models import Example
 
 
 class ExampleListView(BaseView):
