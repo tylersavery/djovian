@@ -24,3 +24,16 @@ if settings.DEBUG and settings.LIVE_RELOAD:
 
     # urlpatterns.append(path("__debug__/", include(debug_toolbar.urls)))
     urlpatterns.append(path("__reload__/", include("django_browser_reload.urls")))
+
+if settings.SWAGGER_ENABLED:
+
+    from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+    urlpatterns.append(path("schema/", SpectacularAPIView.as_view(), name="schema"))
+    urlpatterns.append(
+        path(
+            "docs/",
+            SpectacularSwaggerView.as_view(url_name="schema"),
+            name="swagger-ui",
+        )
+    )

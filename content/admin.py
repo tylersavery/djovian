@@ -29,6 +29,7 @@ class ExampleAdmin(ModelAdmin):
     fields = (
         "uuid",
         "title",
+        "description",
         "owner",
         "image",
         "created_at",

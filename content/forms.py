@@ -6,4 +6,4 @@ from .models import Example
 class ExampleForm(forms.ModelForm):
     class Meta:
         model = Example
-        fields = ["title", "image"]
+        fields = ["title", "description", "image"]

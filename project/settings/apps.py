@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "rest_framework",
+    "drf_spectacular",
     "crispy_forms",
     # "crispy_tailwind",
     "crispy_daisyui",

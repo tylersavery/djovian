@@ -20,7 +20,12 @@
 
     <p class="text-sm text-base-content/60">Created on {{ item.created_at|date:"F j, Y" }}</p>
 
-    <p class="text-sm text-base-content/80 line-clamp-3">{{ item.owner.username }}</p>
+    <a href="{% url 'profile' username=item.owner.username %}" class="block text-sm text-base-content/80 line-clamp-3 hover:underline">{{ item.owner.username }}</a>
+
+    <div class="divider"></div>
+    {% if item.description %}
+        <p class="prose">{{item.description}}</p>
+    {% endif %}
     <div class="divider"></div>
 
     <a href="{% url 'example_list' %}" class="btn btn-primary">Back</a>
