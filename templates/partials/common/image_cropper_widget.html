@@ -30,14 +30,14 @@
 
     new CropperWidget(element, {
       aspectRatio: 1,
-      onCrop: async (blob) => {
+      onCrop: async (blob, filename) => {
         const contentType = blob.type || 'image/jpeg';
         const extension = contentType.split('/')[1];
 
         const res = await fetch("{% url 'init_asset_upload' %}", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}' },
-          body: JSON.stringify({ content_type: contentType, extension: extension }),
+          body: JSON.stringify({ content_type: contentType, extension: extension, filename: filename }),
         });
 
         const { upload_url, public_url, key } = await res.json();

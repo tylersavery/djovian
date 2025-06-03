@@ -13,11 +13,15 @@ class InitUploadView(APIView):
     def post(self, request):
         content_type = request.data.get("content_type")
         extension = request.data.get("extension", "jpg")
+        filename = request.data.get("filename", None)
 
         if not content_type or not extension:
             return Response({"error": "Missing content type or extension"}, status=400)
 
-        key = f"uploads/{uuid.uuid4()}.{extension}"
+        if not filename:
+            filename = f"{uuid.uuid4()}.{extension}"
+
+        key = f"uploads/{uuid.uuid4()}/{filename}"
 
         s3 = boto3.client("s3")
         upload_url = s3.generate_presigned_url(
