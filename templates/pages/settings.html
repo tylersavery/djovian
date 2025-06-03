@@ -56,7 +56,7 @@
     
     <form class="space-y-4 md:space-y-6" method="post">
       {% csrf_token %}
-      {% include "partials/common/image_cropper_widget.html" with id="profile-image-upload" field_name="avatar_key" label="Avatar" initial=user.avatar_url %}
+      {% include "partials/common/image_cropper_widget.html" with id="profile-image-upload" field_name="avatar_key" label="Avatar" initial=user.avatar_url upload_to="avatars" %}
 
       {{ form|crispy }}
 

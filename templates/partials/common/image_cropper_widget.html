@@ -1,12 +1,10 @@
 {% load static tailwind_tags %}
 
-<!-- templates/includes/image_cropper_widget.html -->
 <div class="cropper-widget space-y-2" data-cropper-id="{{ id|default:'cropper-widget' }}" id="{{ id|default:'cropper-widget' }}">
   <label class="block text-sm font-bold mb-1">{{label|default:'Image'}}</label>
   <input type="file" class="file-input file-input-bordered w-full" />
   <img class="preview rounded border max-h-48 {% if not initial %}hidden{% endif %}" src="{{initial}}" />
-  {% comment %} <input type="hidden" value="{{initial|default:''}}" name="{{field_name|default:'image'}}" id="{{ id|default:'cropper-widget-' }}-field" /> {% endcomment %}
-  <!-- Modal -->
+
   <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden justify-center items-center" data-cropper-modal>
     <div class="bg-white p-4 rounded shadow-xl max-w-lg w-full">
       <div class="text-right">
@@ -26,7 +24,6 @@
   window.onload = () => {
     
     const element = document.getElementById("{{ id|default:'cropper-widget' }}")
-    console.log(element)
 
     new CropperWidget(element, {
       aspectRatio: 1,
@@ -37,7 +34,7 @@
         const res = await fetch("{% url 'init_asset_upload' %}", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}' },
-          body: JSON.stringify({ content_type: contentType, extension: extension, filename: filename }),
+          body: JSON.stringify({ content_type: contentType, extension: extension, filename: filename, upload_to: "{{upload_to|default:'uploads'}}" }),
         });
 
         const { upload_url, public_url, key } = await res.json();
@@ -48,11 +45,7 @@
           body: blob,
         });
 
-
         document.getElementById("id_{{field_name|default:'image'}}").value = key;
-
-
-
 
       }
     })
