@@ -141,7 +141,36 @@
         setTheme(next);
       });
     </script>
-              
+
+    {% comment %} <script type="module">
+      import { CropperWidget } from '/static/js/cropper-widget.js';
+
+      console.log("Hello")
+
+      document.querySelectorAll('.cropper-widget').forEach((el) => {
+        console.log(el)
+        new CropperWidget(el, {
+          aspectRatio: 1, // Or 16/9 etc
+          onCrop: (blob) => {
+            const formData = new FormData();
+            formData.append('cropped_image', blob, 'cropped.jpg');
+
+            fetch('/upload-cropped/', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+              },
+            }).then((res) => {
+              if (res.ok) {
+                console.log('Uploaded!');
+              }
+            });
+          },
+        });
+      });
+    </script> {% endcomment %}
+                  
 
    
 

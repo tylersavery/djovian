@@ -9,8 +9,7 @@
 
 <div class="max-w-5xl mx-auto ">
   <div class=" p-4">
-
-
+    
   <h1 class="text-xl font-bold leading-tight tracking-tight  md:text-3xl">Settings</h1>
   <div class="py-2"></div>
   <h2 class="text-lg font-medium leading-tight tracking-tight  md:text-xl">My Account</h2>
@@ -54,87 +53,26 @@
 
   <div class="bg-base-200 p-4 rounded-lg shadow-lg mt-4">
 
-  <form class="space-y-4 md:space-y-6" method="post">
+    
+    <form class="space-y-4 md:space-y-6" method="post">
       {% csrf_token %}
-
-
-      <div class="flex items-center">
-          <div style="width:200px">
-            <label class="flex flex-col items-center gap-2">
-              
-              {% if avatar %}
-              <img src="{{avatar.url}}" class=" w-full aspect-1" id="cropResult" width="100%" height="100%" />
-              {% else %}
-              <img src="#" class="hidden  w-full aspect-1" id="cropResult" width="100%" height="100%" />
-              {% endif %}
-              <input type="file" id="fileInput" class="hidden">
-              <div class=" font-semibold hidden" id="errorImage1">Error</div>
-              <div class="w-full btn-accent btn">
-                {% if avatar %}Change Avatar{% else %}Upload Avatar{% endif %}
-              </div>
-            </label>
-          </div>
-      </div>
-
+      {% include "partials/common/image_cropper_widget.html" with id="profile-image-upload" field_name="avatar_key" label="Avatar" initial=user.avatar_url %}
 
       {{ form|crispy }}
 
-      <button type="submit" id="submit"
-      class="btn btn-primary w-full ">Save Profile Changes</button>
+      <button type="submit" id="submit" class="btn btn-primary w-full ">Save Profile Changes</button>
   </form>
 </div>
 
 
-  {% endif %}
-
-
 
   </div>
 
 
 
-  <div id="cropModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <div class="relative  rounded-lg shadow-sm ">
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
-                <h3 class="text-xl font-semibold  ">
-                    Crop Image
-                </h3>
-                <button type="button" id="cropCloseX" class="  hover: hover: rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-              <img id="cropImage" style="width:100%" alt="Image to crop">
-            <div class="flex justify-between items-center p-4 md:p-5 border-t  rounded-b">
-              <button id="cropClose"  type="button" class="py-2.5 px-5 text-sm font-medium  focus:outline-hidden  rounded-lg border  hover: hover: focus:z-10 focus:ring-4 focus: ">Cancel</button>
-                <button  id="cropButton" type="button" class=" hover:  font-bold py-2 px-4 border  rounded-r-lg md:rounded-sm ">Crop</button>
-            </div>
-        </div>
-    </div>
-  </div>
 
 </div>
 
 {% endblock %}
 
 
-{% block extra_css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" />
-<style>
-
-  label {
-    margin: 16px 0 8px 0;
-    font-weight: 400;
-  }
-</style>
-
-{% endblock %}
-
-{% block extra_js %}
-
-<script src="{% static 'js/settings.js' %}" type="module" ></script>
-
-{% endblock %}

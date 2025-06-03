@@ -97,14 +97,12 @@ class SettingsView(BaseView):
             }
         )
 
-        context["avatar"] = request.user.avatar
         context["user"] = request.user
 
         return self.render_to_response(context)
 
     def post(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
-        context["avatar"] = request.user.avatar
 
         user = request.user
 
@@ -122,9 +120,9 @@ class SettingsView(BaseView):
             user.state = form.cleaned_data["state"]
             user.country = form.cleaned_data["country"]
             user.zipcode = form.cleaned_data["zipcode"]
-            avatar_base64 = form.cleaned_data["avatar_base64"]
-            if avatar_base64:
-                user.avatar = self.handle_b64_image(avatar_base64)
+            avatar_key = form.cleaned_data["avatar_key"]
+            if avatar_key:
+                user.avatar.name = avatar_key
 
             user.save()
 

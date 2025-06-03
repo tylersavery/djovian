@@ -83,12 +83,11 @@ stripe_listen:
 	stripe listen --forward-to localhost:8000/api/webhooks/stripe/
 
 
-# ---- Porter ----
+# --- JS ----
 
+js_build:
+	docker compose exec web npm run build
 
-release:
-	python manage.py migrate
-	cd theme/static_src && npm install && cd .. && cd ..
-	npm install && npm run build
-	python manage.py tailwind build
-	python manage.py collectstatic --noinput
+js_watch:
+	docker compose exec web npm run watch
+	

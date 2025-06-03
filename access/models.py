@@ -16,3 +16,7 @@ class User(AbstractUser):
     state = models.CharField(max_length=32, blank=True, null=True)
     country = models.CharField(max_length=64, blank=True, null=True)
     zipcode = models.CharField(max_length=16, blank=True, null=True)
+
+    @property
+    def avatar_url(self) -> str | None:
+        return self.avatar.url if self.avatar else None

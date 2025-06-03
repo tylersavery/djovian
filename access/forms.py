@@ -52,7 +52,7 @@ class SettingsForm(forms.Form):
     bio = forms.CharField(
         widget=forms.Textarea(attrs={"rows": 4}), label="Bio", required=False
     )
-    avatar_base64 = forms.CharField(widget=forms.HiddenInput, required=False)
+    avatar_key = forms.CharField(widget=forms.HiddenInput, required=False)
     address_1 = forms.CharField(required=False, label="Address")
     address_2 = forms.CharField(required=False, label="Address 2")
     city = forms.CharField(required=False, label="City")

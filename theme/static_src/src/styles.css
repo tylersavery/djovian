@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'cropperjs/dist/cropper.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
