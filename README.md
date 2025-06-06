@@ -25,6 +25,10 @@ git clone git@github.com:tylersavery/djovian.git
 cd djovian
 ```
 
+### 1b. Rename Project (optional)
+
+Simply do a find replace in your editor for `djovian` and replace with the name of your project.
+
 ### 2. Create `.env`
 
 Copy the example and tweak values if needed:
@@ -35,22 +39,34 @@ cp .env.example .env
 
 And update with your local secrets.
 
+### 3. Setup local venv (optional)
 
-### 3. Build & run services
+You can either use the `Dev Containers` vs code extension to work directly in docker OR just mirror docker's pythong environment with your local virtual environment. For the former, simply run:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+This is only so that your get the proper intellisence in your local environment.
+
+
+### 4. Build & run services
 
 ```bash
 make build
 make up
 ```
 
-### 4. Run initial setup
+### 5. Run initial setup
 
 ```bash
 make migrate
 make createsuperuser
 ```
 
-### 5. Load the admin theme data
+### 6. Load the admin theme data
 ```bash
 make admin_theme_load
 ```
