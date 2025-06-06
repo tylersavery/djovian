@@ -1,10 +1,11 @@
 import uuid
 import boto3
+
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from api.permissions import AllowAny, IsAuthenticated
+from api.permissions import IsAuthenticated
 
 
 class InitUploadView(APIView):
